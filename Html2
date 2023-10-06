@@ -1,0 +1,26 @@
+import flask
+
+app = flask.Flask(__name__)
+
+@app.route('/')
+def index():
+    name = flask.request.args.get('name')
+
+    return flask.render_template('index.html', name=name)
+
+@app.route('/hello', methods=['GET', 'POST'])
+def hello():
+    if flask.request.method == 'POST':
+        name= flask.request.form.get('name')
+    
+        return flask.render_template('index.html', name=name)
+    return flask.render_template('form.html')
+
+@app.route('/post/new')
+def new_post():
+    return flask.render_template("pos_form.html")
+
+
+
+
+app.run(debug=True)
